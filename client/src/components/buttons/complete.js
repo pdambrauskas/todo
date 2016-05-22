@@ -5,8 +5,10 @@ var tasksAPI = require('../../api/tasks');
 
 module.exports = React.createClass({
   completeTask: function() {
-    tasksAPI.update(this.props.id, { completed: true }, function(error, task) {
-      this.props.onTaskComplete(task);
+    tasksAPI.update(this.props.id, { completed: true }, function(error, data) {
+      if (error) return;
+
+      this.props.onTaskComplete(data);
     }.bind(this));
   },
 

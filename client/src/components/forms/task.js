@@ -11,8 +11,10 @@ module.exports = React.createClass({
     var data = jQuery(event.target).serialize();
     event.preventDefault();
 
-    tasksAPI.create(data, function(error, task) {
-      this.props.onNewTask(task);
+    tasksAPI.create(data, function(error, data) {
+      if (error) return alert(data['error']['message']);
+
+      this.props.onNewTask(data);
     }.bind(this));
   },
 
@@ -21,7 +23,7 @@ module.exports = React.createClass({
       <form onSubmit={this.onSubmit}>
         <FormGroup controlId='title'>
           <ControlLabel>Title</ControlLabel>
-          <FormControl type='text' name='title' />
+          <FormControl type='text' name='title' required='true' />
         </FormGroup>
         <FormGroup controlId='description'>
           <ControlLabel>Description</ControlLabel>

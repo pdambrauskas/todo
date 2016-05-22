@@ -26,7 +26,7 @@ module.exports = {
         callback(null, data);
       },
       error: function(xhr, status, error) {
-        callback(error, null);
+        callback(error, jQuery.parseJSON(xhr.responseText));
       }
     });
   },

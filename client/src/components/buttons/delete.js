@@ -5,8 +5,10 @@ var tasksAPI = require('../../api/tasks');
 
 module.exports = React.createClass({
   deleteTask: function() {
-    tasksAPI.destroy(this.props.id, function(error, task) {
-      this.props.onTaskDestroy(task);
+    tasksAPI.destroy(this.props.id, function(error, data) {
+      if (error) return;
+
+      this.props.onTaskDestroy(data);
     }.bind(this));
   },
 
