@@ -1,0 +1,23 @@
+{
+  "name": "todo_server",
+  "version": "1.0.0",
+  "description": "ToDo list server",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node spec/",
+    "server": "node server.js"
+  },
+  "keywords": [
+    "todo",
+    "list",
+    "Server"
+  ],
+  "author": "Paulius Dambrauskas",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.19",
+    "mongoose": "^4.4.17"
+  }
+}
