@@ -15,7 +15,7 @@ module.exports = {
   },
 
   update: function(id, attributes, callback) {
-    var options = { runValidators: true };
+    var options = { runValidators: true, new: true };
     Task.findOneAndUpdate({ _id: id }, attributes, options, callback);
   },
 
