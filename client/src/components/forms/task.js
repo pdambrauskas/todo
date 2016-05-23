@@ -12,7 +12,7 @@ module.exports = React.createClass({
     event.preventDefault();
 
     tasksAPI.create(data, function(error, data) {
-      if (error) return alert(data['error']['message']);
+      if (error) return alert(data['message']);
 
       this.props.onNewTask(data);
     }.bind(this));

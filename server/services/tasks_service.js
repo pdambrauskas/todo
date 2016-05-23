@@ -1,23 +1,25 @@
-var task = require('../models/task.js');
+var Task = require('../models/task.js');
 
 module.exports = {
   all: function(callback) {
-    task.find(callback);
+    Task.find(callback);
   },
 
   find: function(id, callback) {
-    task.findById(id, callback);
+    Task.findById(id, callback);
   },
 
   create: function(attributes, callback) {
-    task.create(attributes, callback);
+    var task = new Task(attributes);
+    task.save(callback);
   },
 
   update: function(id, attributes, callback) {
-    task.findByIdAndUpdate(id, attributes, callback);
+    var options = { runValidators: true };
+    Task.findOneAndUpdate({ _id: id }, attributes, options, callback);
   },
 
   destroy: function(id, callback) {
-    task.findByIdAndRemove(id, callback);
+    Task.findByIdAndRemove(id, callback);
   }
 }

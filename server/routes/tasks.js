@@ -1,22 +1,17 @@
 var tasksService = require('../services/tasks_service');
-var taskValidator = require('../validators/tasks_validator')
 var express = require('express');
 var router = express.Router();
 
-var errorResponse = function(response) {
-  response.sendStatus(500);
-};
-
-var validationResponse = function(response) {
+var errorResponse = function(error, response) {
   response
     .status(422)
-    .send(JSON.stringify({ error: { code: 'invalid_data', message: 'Invalid data!' } }));
+    .send(JSON.stringify(error));
 };
 
 /* GET / */
 router.get('/', function(request, response) {
   tasksService.all(function (error, tasks) {
-    if (error) return errorResponse(response);
+    if (error) return errorResponse(error, response);
     response.json(tasks);
   });
 });
@@ -24,10 +19,8 @@ router.get('/', function(request, response) {
 /* POST / */
 router.post('/', function(request, response) {
   var attributes = request.body;
-  if (!taskValidator.isValid(attributes)) return validationResponse(response);
-
   tasksService.create(attributes, function(error, task) {
-    if (error) return errorResponse(response);
+    if (error) return errorResponse(error, response);
     response.json(task);
   });
 });
@@ -35,7 +28,7 @@ router.post('/', function(request, response) {
 /* GET /:id */
 router.get('/:id', function(request, response) {
   tasksService.find(request.params.id, function(error, task) {
-    if (error) return errorResponse(response);
+    if (error) return errorResponse(error, response);
     response.json(task);
   });
 });
@@ -43,10 +36,9 @@ router.get('/:id', function(request, response) {
 /* PUT /:id */
 router.put('/:id', function(request, response) {
   var attributes = request.body;
-  if (!taskValidator.isValid(attributes)) return validationResponse(response);
 
   tasksService.update(request.params.id, attributes, function(error, task) {
-    if (error) return errorResponse(response);
+    if (error) return errorResponse(error, response);
     response.json(task);
   });
 });
@@ -54,7 +46,7 @@ router.put('/:id', function(request, response) {
 /* DELETE /:id */
 router.delete('/:id', function(request, response) {
   tasksService.destroy(request.params.id, function(error, task) {
-    if (error) return errorResponse(response);
+    if (error) return errorResponse(error, response);
     response.json(task);
   });
 });
