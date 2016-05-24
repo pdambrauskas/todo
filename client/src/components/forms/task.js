@@ -27,7 +27,7 @@ module.exports = React.createClass({
         </FormGroup>
         <FormGroup controlId='description'>
           <ControlLabel>Description</ControlLabel>
-          <FormControl componentClass='textarea' name='description' />
+          <FormControl componentClass='textarea' name='description' required='true' />
         </FormGroup>
         <Button type='submit' bsStyle='primary'>Submit</Button>
       </form>
