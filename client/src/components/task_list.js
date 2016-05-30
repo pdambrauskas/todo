@@ -47,7 +47,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <Col xs={12} md={6} xsOffset={3}>
+      <Col xs={12} md={12} lg={6} lgOffset={3}>
         <Panel header='ToDo List' bsStyle='primary'>
           <ListGroup>
             {
