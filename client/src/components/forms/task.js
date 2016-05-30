@@ -23,12 +23,13 @@ module.exports = React.createClass({
       <form onSubmit={this.onSubmit}>
         <FormGroup controlId='title'>
           <ControlLabel>Title</ControlLabel>
-          <FormControl type='text' name='title' required='true' />
+          <FormControl type='text' name='title' required='true' pattern='.{4,}' title='4 characters minimum'  />
         </FormGroup>
         <FormGroup controlId='description'>
           <ControlLabel>Description</ControlLabel>
           <FormControl componentClass='textarea' name='description' required='true' />
         </FormGroup>
+
         <Button type='submit' bsStyle='primary'>Submit</Button>
       </form>
     );
