@@ -1,28 +1,16 @@
-import React from 'react';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Button from 'react-bootstrap/lib/Button';
+import CotrolButton from './control_button'
 import * as tasksAPI from '../../api/tasks';
 
-export default class DeleteButton extends React.Component {
+export default class DeleteButton extends CotrolButton {
   constructor(props) {
-    super(props);
-
-    this.deleteTask = this.deleteTask.bind(this);
+    super(props, 'Delete task', 'remove');
   }
 
-  deleteTask() {
+  buttonAction() {
     tasksAPI.destroy(this.props.id, (error, data) => {
       if (error) return;
 
       this.props.onTaskDestroy(data);
     });
-  }
-
-  render() {
-    return(
-      <Button bsSize='xsmall' title='Mark as completed' onClick={this.deleteTask}>
-        <Glyphicon glyph='remove' />
-      </Button>
-    );
   }
 }
