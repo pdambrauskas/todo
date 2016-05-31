@@ -8,8 +8,8 @@ var jQuery = require('jquery');
 
 module.exports = React.createClass({
   onSubmit: function(event) {
-    var data = jQuery(event.target).serialize();
     event.preventDefault();
+    var data = jQuery(event.target).serialize();
 
     tasksAPI.create(data, function(error, data) {
       if (error) return alert(data['message']);
