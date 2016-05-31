@@ -19,5 +19,8 @@
     "express": "^4.13.4",
     "mongodb": "^2.1.19",
     "mongoose": "^4.4.17"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
   }
 }
