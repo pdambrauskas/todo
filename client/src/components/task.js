@@ -1,8 +1,8 @@
 import React from 'react';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import CompleteButton from './buttons/complete';
-import DeleteButton from './buttons/delete';
+import CompleteButton from './buttons/complete_button';
+import DeleteButton from './buttons/delete_button';
 
 export default class Task extends React.Component {
   render() {

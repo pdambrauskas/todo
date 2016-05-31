@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/lib/Col';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import Panel from 'react-bootstrap/lib/Panel';
 import Task from './task';
-import CreateButton from './buttons/create';
+import CreateButton from './buttons/create_button';
 import jQuery from 'jquery'
 import * as tasksAPI from '../api/tasks';
 

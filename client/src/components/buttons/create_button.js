@@ -1,7 +1,7 @@
 import React from 'react';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Button from 'react-bootstrap/lib/Button';
-import TaskModal from '../modals/task';
+import TaskModal from '../modals/task_modal';
 
 export default class CreateButton extends React.Component {
   constructor(props) {
