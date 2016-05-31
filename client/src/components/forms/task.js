@@ -1,26 +1,32 @@
-var React = require('react');
-var FormGroup = require('react-bootstrap/lib/FormGroup');
-var ControlLabel = require('react-bootstrap/lib/ControlLabel');
-var FormControl = require('react-bootstrap/lib/FormControl');
-var Button = require('react-bootstrap/lib/Button');
-var tasksAPI = require('../../api/tasks');
-var jQuery = require('jquery');
+import React from 'react';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Button from 'react-bootstrap/lib/Button';
+import * as tasksAPI from '../../api/tasks';
+import jQuery from 'jquery'
 
-module.exports = React.createClass({
-  onSubmit: function(event) {
+export default class TaskForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.submitTask = this.submitTask.bind(this);
+  }
+
+  submitTask(event) {
     event.preventDefault();
-    var data = jQuery(event.target).serialize();
+    var params = jQuery(event.target).serialize();
 
-    tasksAPI.create(data, function(error, data) {
+    tasksAPI.create(params, (error, data) => {
       if (error) return alert(data['message']);
 
       this.props.onNewTask(data);
-    }.bind(this));
-  },
+    });
+  }
 
-  render: function() {
+  render() {
     return(
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.submitTask}>
         <FormGroup controlId='title'>
           <ControlLabel>Title</ControlLabel>
           <FormControl type='text' name='title' required='true' pattern='.{4,}' title='4 characters minimum'  />
@@ -34,4 +40,4 @@ module.exports = React.createClass({
       </form>
     );
   }
-});
+}

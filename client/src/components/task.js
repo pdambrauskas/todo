@@ -1,12 +1,13 @@
-var React = require('react');
-var ListGroupItem = require('react-bootstrap/lib/ListGroupItem');
-var ButtonGroup = require('react-bootstrap/lib/ButtonGroup');
-var CompleteButton = require('./buttons/complete');
-var DeleteButton = require('./buttons/delete');
+import React from 'react';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import CompleteButton from './buttons/complete';
+import DeleteButton from './buttons/delete';
 
-module.exports = React.createClass({
-  render: function() {
-    var task = this.props.data
+export default class Task extends React.Component {
+  render() {
+    let task = this.props.data
+
     return(
       <ListGroupItem header={task.title} disabled={task.completed} className='clearfix'>
         <ButtonGroup bsClass='btn-group pull-right'>
@@ -17,4 +18,4 @@ module.exports = React.createClass({
       </ListGroupItem>
     );
   }
-});
+}

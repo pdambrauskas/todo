@@ -1,62 +1,66 @@
-var React = require('react');
-var Col = require('react-bootstrap/lib/Col');
-var ListGroup = require('react-bootstrap/lib/ListGroup');
-var Panel = require('react-bootstrap/lib/Panel');
-var Task = require('./task');
-var CreateButton = require('./buttons/create');
-var jQuery = require('jQuery');
-var tasksAPI = require('../api/tasks');
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import Panel from 'react-bootstrap/lib/Panel';
+import Task from './task';
+import CreateButton from './buttons/create';
+import jQuery from 'jquery'
+import * as tasksAPI from '../api/tasks';
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return { tasks: [] };
-  },
+export default class TaskList extends React.Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount: function() {
-    tasksAPI.all(function(error, tasks) {
-      this.setState({ tasks: tasks });
-    }.bind(this));
-  },
+    this.state = { tasks: [] };
 
-  destroyTask: function(task) {
-    var index = this.getTaskIndex(task);
+    this.destroyTask = this.destroyTask.bind(this);
+    this.completeTask = this.completeTask.bind(this);
+    this.createTask = this.createTask.bind(this);
+  }
+
+  componentDidMount() {
+    tasksAPI.all((error, tasks) => { this.setState({ tasks: tasks }) });
+  }
+
+  destroyTask(task) {
+    let index = this.getTaskIndex(task);
 
     this.state.tasks.splice(index, 1);
     this.setState({ tasks: this.state.tasks });
-  },
+  }
 
-  completeTask: function(task) {
-    var index = this.getTaskIndex(task);
+  completeTask(task) {
+    let index = this.getTaskIndex(task);
 
     this.state.tasks[index]['completed'] = true;
     this.setState({ tasks: this.state.tasks });
-  },
+  }
 
-  createTask: function(task) {
+  createTask(task) {
     this.state.tasks.push(task);
     this.setState({ tasks: this.state.tasks });
-  },
+  }
 
-  getTaskIndex: function(task) {
-    var taskFromState = jQuery.grep(this.state.tasks, function(object) {
+  getTaskIndex(task) {
+    let taskFromState = jQuery.grep(this.state.tasks, (object) => {
       return object._id == task._id;
     });
 
     return this.state.tasks.indexOf(taskFromState[0]);
-  },
+  }
 
-  render: function() {
-    return (
+  render() {
+    return(
       <Col xs={12} md={12} lg={6} lgOffset={3}>
         <Panel header='ToDo List' bsStyle='primary'>
           <ListGroup>
             {
-              this.state.tasks.map(function(task) {
+              this.state.tasks.map((task) => {
                 return <Task key={task._id}
                              data={task}
                              onTaskDestroy={this.destroyTask}
                              onTaskComplete={this.completeTask} />;
-              }.bind(this))
+              })
             }
           </ListGroup>
           <CreateButton onNewTask={this.createTask}/>
@@ -64,4 +68,4 @@ module.exports = React.createClass({
       </Col>
     );
   }
-});
+}

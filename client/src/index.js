@@ -1,5 +1,5 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TaskList = require('./components/task_list');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TaskList from './components/task_list';
 
 ReactDOM.render(<TaskList />, document.getElementById('app'));

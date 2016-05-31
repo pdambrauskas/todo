@@ -8,6 +8,7 @@ var request = function(url, callback, options = {}) {
       callback(false, response.data);
     })
     .catch(function(error) {
+      console.log(error)
       callback(true, error.data);
     });
 };
