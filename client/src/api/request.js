@@ -28,4 +28,4 @@ function destroy(url, callback) {
   request(url, callback, { method: 'DELETE' });
 }
 
-export default { get, post, destroy, put }
+export default { get, post, destroy, put };

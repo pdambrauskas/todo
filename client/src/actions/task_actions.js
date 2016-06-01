@@ -1,26 +1,28 @@
 import * as ActionTypes from '../constants/action_types';
 
-export function destroyTask(task) {
+function destroyTask(task) {
   return {
     ...task,
     type: ActionTypes.DELETE_TASK
   };
 }
 
-export function completeTask(task) {
+function completeTask(task) {
   return {
     ...task,
     type: ActionTypes.COMPLETE_TASK,
   };
 }
 
-export function createTask(task) {
+function createTask(task) {
   return {
     ...task,
     type: ActionTypes.CREATE_TASK,
   };
 }
 
-export function loadTasks(tasks) {
+function loadTasks(tasks) {
   return { tasks: tasks, type: ActionTypes.LOAD_TASKS };
 }
+
+export { destroyTask, completeTask, createTask, loadTasks };

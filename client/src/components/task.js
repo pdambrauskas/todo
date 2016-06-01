@@ -6,7 +6,7 @@ import DeleteButton from './buttons/delete_button';
 
 export default class Task extends React.Component {
   render() {
-    let task = this.props.data
+    let task = this.props.data;
 
     return(
       <ListGroupItem header={task.title} disabled={task.completed} className='clearfix'>

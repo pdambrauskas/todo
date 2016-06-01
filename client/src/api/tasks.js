@@ -17,4 +17,4 @@ function destroy(id, callback) {
   request.destroy(API_URL + id, callback);
 }
 
-export { all, create, update, destroy }
+export { all, create, update, destroy };

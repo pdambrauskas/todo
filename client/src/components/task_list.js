@@ -46,4 +46,4 @@ class TaskList extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(TaskList)
+export default connect(mapStateToProps)(TaskList);
