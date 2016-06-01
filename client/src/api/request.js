@@ -1,6 +1,6 @@
-var axios = require('axios');
+import axios from 'axios';
 
-var request = function(url, callback, options = {}) {
+function request(url, callback, options = {}) {
   options['headers'] = { 'Content-Type': 'application/x-www-form-urlencoded' }
 
   axios(url, options)
@@ -10,22 +10,22 @@ var request = function(url, callback, options = {}) {
     .catch(function(error) {
       callback(true, error.data);
     });
-};
-
-module.exports = {
-  get: function(url, callback) {
-    request(url, callback);
-  },
-
-  post: function(url, callback, data) {
-    request(url, callback, { method: 'POST', data: data });
-  },
-
-  put: function(url, callback, data) {
-    request(url, callback, { method: 'PUT', data: data });
-  },
-
-  delete: function(url, callback) {
-    request(url, callback, { method: 'DELETE' });
-  },
 }
+
+function get(url, callback) {
+  request(url, callback);
+}
+
+function post(url, callback, data) {
+  request(url, callback, { method: 'POST', data: data });
+}
+
+function put(url, callback, data) {
+  request(url, callback, { method: 'PUT', data: data });
+}
+
+function destroy(url, callback) {
+  request(url, callback, { method: 'DELETE' });
+}
+
+export default { get, post, destroy, put }

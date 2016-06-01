@@ -1,20 +1,20 @@
-var API_URL = 'http://localhost:3040/';
-var request = require('./request');
+const API_URL = 'http://localhost:3040/';
+import request from './request';
 
-module.exports = {
-  all: function(callback) {
-    request.get(API_URL, callback);
-  },
-
-  create: function(data, callback) {
-    request.post(API_URL, callback, data);
-  },
-
-  update: function(id, data, callback) {
-    request.put(API_URL + id, callback, data);
-  },
-
-  destroy: function(id, callback) {
-    request.delete(API_URL + id, callback);
-  }
+function all(callback) {
+  request.get(API_URL, callback);
 }
+
+function create(data, callback) {
+  request.post(API_URL, callback, data);
+}
+
+function update(id, data, callback) {
+  request.put(API_URL + id, callback, data);
+}
+
+function destroy(id, callback) {
+  request.destroy(API_URL + id, callback);
+}
+
+export { all, create, update, destroy }
