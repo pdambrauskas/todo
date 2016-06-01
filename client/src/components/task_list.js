@@ -1,71 +1,49 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import ListGroup from 'react-bootstrap/lib/ListGroup';
-import Panel from 'react-bootstrap/lib/Panel';
+import { Col, ListGroup, Panel} from 'react-bootstrap/lib/';
 import Task from './task';
 import CreateButton from './buttons/create_button';
-import jQuery from 'jquery'
 import * as tasksAPI from '../api/tasks';
 
-export default class TaskList extends React.Component {
-  constructor(props) {
-    super(props);
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-    this.state = { tasks: [] };
+import * as TaskActions from '../actions/task_actions';
 
-    this.destroyTask = this.destroyTask.bind(this);
-    this.completeTask = this.completeTask.bind(this);
-    this.createTask = this.createTask.bind(this);
-  }
+function mapStateToProps(state) {
+  return { tasks: state ? state.tasks: [] }
+}
 
-  componentDidMount() {
-    tasksAPI.all((error, tasks) => { this.setState({ tasks: tasks }) });
-  }
-
-  destroyTask(task) {
-    let index = this.getTaskIndex(task);
-
-    this.state.tasks.splice(index, 1);
-    this.setState({ tasks: this.state.tasks });
-  }
-
-  completeTask(task) {
-    let index = this.getTaskIndex(task);
-
-    this.state.tasks[index]['completed'] = true;
-    this.setState({ tasks: this.state.tasks });
-  }
-
-  createTask(task) {
-    this.state.tasks.push(task);
-    this.setState({ tasks: this.state.tasks });
-  }
-
-  getTaskIndex(task) {
-    let taskFromState = jQuery.grep(this.state.tasks, (object) => {
-      return object._id == task._id;
+class TaskList extends React.Component {
+  componentWillMount() {
+    tasksAPI.all((error, tasks) => {
+      let { dispatch } = this.props
+      let action = TaskActions.loadTasks(tasks);
+      dispatch(action);
     });
-
-    return this.state.tasks.indexOf(taskFromState[0]);
   }
 
   render() {
+    let { tasks, dispatch } = this.props
+    let actions = bindActionCreators(TaskActions, dispatch);
+
     return(
       <Col xs={12} md={12} lg={6} lgOffset={3}>
         <Panel header='ToDo List' bsStyle='primary'>
           <ListGroup>
             {
-              this.state.tasks.map((task) => {
+              tasks.map((task) => {
                 return <Task key={task._id}
                              data={task}
-                             onTaskDestroy={this.destroyTask}
-                             onTaskComplete={this.completeTask} />;
+                             onTaskDestroy={actions.destroyTask}
+                             onTaskComplete={actions.completeTask} />;
               })
             }
           </ListGroup>
-          <CreateButton onNewTask={this.createTask}/>
+          <CreateButton onNewTask={actions.createTask}/>
         </Panel>
       </Col>
     );
   }
 }
+
+export default connect(mapStateToProps)(TaskList)

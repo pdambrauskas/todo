@@ -1,6 +1,5 @@
 import React from 'react';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Button from 'react-bootstrap/lib/Button';
+import { Glyphicon, Button} from 'react-bootstrap/lib/';
 
 export default class CotrolButton extends React.Component {
   constructor(props, title, icon) {
