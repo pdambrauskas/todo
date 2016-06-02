@@ -4,7 +4,7 @@ export default function tasks(state, action) {
   switch (action.type) {
     case ActionTypes.CREATE_TASK:
       let tasks = state.tasks.slice(0);
-      tasks.push(action);
+      tasks.push(action.task);
 
       return {
         ...state,
@@ -15,7 +15,7 @@ export default function tasks(state, action) {
       return {
         ...state,
         tasks: state.tasks.filter((task) => {
-          return task._id != action._id;
+          return task._id != action.task._id;
         })
       };
 
@@ -23,7 +23,7 @@ export default function tasks(state, action) {
       return {
         ...state,
         tasks: state.tasks.map((task) => {
-          if (task._id == action._id) task.completed = true;
+          if (task._id == action.task._id) task.completed = true;
           return task;
         })
       };
