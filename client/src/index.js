@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TaskList from './components/task_list';
+import TaskListContainer from './containers/task_list_container';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ const STORE = createStore(taskListReducer);
 
 ReactDOM.render(
   <Provider store={STORE}>
-    <TaskList />
+    <TaskListContainer />
   </Provider>,
   document.getElementById('app')
 );

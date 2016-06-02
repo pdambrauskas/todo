@@ -4,27 +4,9 @@ import Task from './task';
 import CreateButton from './buttons/create_button';
 import * as tasksAPI from '../api/tasks';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import * as TaskActions from '../actions/task_actions';
-
-function mapStateToProps(state) {
-  return { tasks: state ? state.tasks: [] }
-}
-
-class TaskList extends React.Component {
-  componentWillMount() {
-    tasksAPI.all((error, tasks) => {
-      let { dispatch } = this.props
-      let action = TaskActions.loadTasks(tasks);
-      dispatch(action);
-    });
-  }
-
+export default class TaskList extends React.Component {
   render() {
-    let { tasks, dispatch } = this.props
-    let actions = bindActionCreators(TaskActions, dispatch);
+    let { tasks, actions } = this.props
 
     return(
       <Col xs={12} md={12} lg={6} lgOffset={3}>
@@ -45,5 +27,3 @@ class TaskList extends React.Component {
     );
   }
 }
-
-export default connect(mapStateToProps)(TaskList);
