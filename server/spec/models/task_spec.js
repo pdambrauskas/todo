@@ -27,6 +27,17 @@ describe('validation', function() {
     });
   });
 
+  describe('title of spaces', function() {
+    var parameters = { title: '           ' };
+
+    it('returns error', function(done) {
+      new Task(parameters).save(function(error, data) {
+        expect(error).not.toBe(null);
+        done();
+      });
+    });
+  });
+
   describe('valid title', function() {
     var parameters = { title: 'long title' };
 

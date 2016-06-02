@@ -26,7 +26,7 @@ export default class TaskForm extends React.Component {
       <form onSubmit={this.submitTask}>
         <FormGroup controlId='title'>
           <ControlLabel>Title</ControlLabel>
-          <FormControl type='text' name='title' required='true' pattern='.{4,}' title='4 characters minimum'  />
+          <FormControl type='text' name='title' required='true' pattern='([\w].*){4,}' title='4 characters minimum'  />
         </FormGroup>
         <FormGroup controlId='description'>
           <ControlLabel>Description</ControlLabel>
