@@ -10,14 +10,14 @@ function destroyTask(task) {
 function completeTask(task) {
   return {
     task: task,
-    type: ActionTypes.COMPLETE_TASK,
+    type: ActionTypes.COMPLETE_TASK
   };
 }
 
 function createTask(task) {
   return {
     task: task,
-    type: ActionTypes.CREATE_TASK,
+    type: ActionTypes.CREATE_TASK
   };
 }
 
